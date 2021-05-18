@@ -14,12 +14,15 @@ function App() {
         { id: v1(), title: "Rest API", isDone: false },
         { id: v1(), title: "GraphQL", isDone: false },
     ]);
-
     function removeTask(id: string) {
         let filteredTasks = tasks.filter(t => t.id != id);
         setTasks(filteredTasks);
     }
-
+    function addTask() {
+        let newtask = {id: v1(), title: "New task", isDone: false};
+        let newTasks = [newtask, ...tasks];
+        setTasks(newTasks);
+    }
     let [filter, setFilter] = useState<FilterValuesType>("all");
 
     let tasksForTodolist = tasks;
@@ -40,7 +43,8 @@ function App() {
             <Todolist title="What to learn"
                       tasks={tasksForTodolist}
                       removeTask={removeTask}
-                      changeFilter={changeFilter} />
+                      changeFilter={changeFilter}
+                      addTask={addTask} />
         </div>
     );
 }
